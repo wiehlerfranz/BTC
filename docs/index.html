@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,247 +6,380 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BTC Quiz - Baby Therapy Centre Pretoria</title>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background: #f4f7fb;
-        margin: 0;
-        padding: 20px;
-        color: #333;
-    }
-    .container {
-        max-width: 900px;
-        margin: auto;
-        background: white;
-        padding: 25px;
-        border-radius: 12px;
-        box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    }
-    h1 {
-        text-align: center;
-        color: #005b96;
-    }
-    .intro {
-        background: #eef7ff;
-        padding: 15px;
-        border-left: 5px solid #005b96;
-        margin-bottom: 25px;
-        border-radius: 6px;
-    }
-    .question {
-        margin-bottom: 25px;
-        padding: 15px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-    }
-    .question h3 {
-        margin-top: 0;
-    }
-    button.option {
-        display: block;
-        width: 100%;
-        text-align: left;
-        margin: 8px 0;
-        padding: 10px;
-        border: none;
-        background: #e9eef5;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-    button.option:hover {
-        background: #d6e7ff;
-    }
-    .correct {
-        background: #c8f7c5 !important;
-    }
-    .incorrect {
-        background: #ffd0d0 !important;
-    }
-    .feedback {
-        margin-top: 10px;
-        padding: 10px;
-        border-radius: 6px;
-        display: none;
-    }
-    .feedback.correct {
-        background: #e6ffe6;
-    }
-    .feedback.incorrect {
-        background: #fff0f0;
-    }
-    #scoreBoard {
-        position: sticky;
-        top: 10px;
-        background: #005b96;
-        color: white;
-        padding: 12px;
-        text-align: center;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        font-weight: bold;
-    }
-    #finalResult {
-        display: none;
-        margin-top: 30px;
-        padding: 20px;
-        background: #eef7ff;
-        border-radius: 8px;
-        text-align: center;
-        font-size: 1.2em;
-    }
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f7fb;
+    margin:0;
+    padding:20px;
+    color:#333;
+}
+.container{
+    max-width:900px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 0 15px rgba(0,0,0,.1);
+}
+h1{
+    text-align:center;
+    color:#005b96;
+}
+.intro{
+    background:#eef7ff;
+    padding:15px;
+    border-left:5px solid #005b96;
+    margin-bottom:20px;
+    border-radius:6px;
+}
+#scoreBoard{
+    position:sticky;
+    top:10px;
+    background:#005b96;
+    color:white;
+    padding:12px;
+    border-radius:8px;
+    text-align:center;
+    margin-bottom:20px;
+    font-weight:bold;
+}
+.question{
+    margin-bottom:25px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    padding:15px;
+}
+.option{
+    display:block;
+    width:100%;
+    margin:8px 0;
+    padding:10px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    background:#e9eef5;
+    text-align:left;
+}
+.option:hover{
+    background:#d6e7ff;
+}
+.correct{
+    background:#c9f7c9 !important;
+}
+.incorrect{
+    background:#ffd2d2 !important;
+}
+.feedback{
+    display:none;
+    margin-top:10px;
+    padding:10px;
+    border-radius:6px;
+}
+.feedback.correct{
+    background:#eaffea;
+}
+.feedback.incorrect{
+    background:#fff0f0;
+}
+#finalResult{
+    display:none;
+    margin-top:30px;
+    padding:20px;
+    text-align:center;
+    background:#eef7ff;
+    border-radius:8px;
+}
 </style>
 </head>
 <body>
 <div class="container">
-    <h1>Baby Therapy Centre (BTC) Quiz</h1>
-    <div class="intro">
-        Test your knowledge about the Baby Therapy Centre in Pretoria, South Africa.
-        Answer each question and receive immediate feedback.
-    </div>
-    <div id="scoreBoard">
-        Score: <span id="score">0</span> / 10
-    </div>
-    <div id="quiz"></div>
-    <div id="finalResult"></div>
+<h1>Baby Therapy Centre Quiz</h1>
+<div class="intro">
+Each time the page loads, 10 questions are randomly selected from a larger question bank.
+Answers are evaluated immediately.
+</div>
+<div id="scoreBoard">
+Score: <span id="score">0</span> / 10
+</div>
+<div id="quiz"></div>
+<div id="finalResult"></div>
 </div>
 <script>
-const quizData = [
+const allQuestions = [
 {
-question: "1. In which city is the Baby Therapy Centre located?",
-options: ["Cape Town", "Durban", "Pretoria", "Johannesburg"],
-correct: 2,
-explanation: "BTC is located in Lynnwood, Pretoria."
+question:"In which city is the Baby Therapy Centre located?",
+correct:"Pretoria",
+wrong:["Johannesburg","Durban","Cape Town"],
+explanation:"BTC is based in Pretoria."
 },
 {
-question: "2. What age group does BTC primarily serve?",
-options: ["Birth to 6 years", "6 to 12 years", "Teenagers only", "Adults"],
-correct: 0,
-explanation: "BTC focuses on babies and young children from birth to six years old."
+question:"In which suburb is BTC situated?",
+correct:"Lynnwood",
+wrong:["Brooklyn","Waterkloof","Menlo Park"],
+explanation:"BTC is located in Lynnwood."
 },
 {
-question: "3. Since which year has BTC been helping families?",
-options: ["2005", "2010", "1995", "1980"],
-correct: 2,
-explanation: "The centre has been supporting children and families since 1995."
+question:"Since which year has BTC been serving families?",
+correct:"1995",
+wrong:["1992","1998","2001"],
+explanation:"BTC was established in 1995."
 },
 {
-question: "4. Which approach is central to BTC's philosophy?",
-options: ["Competitive learning", "Family-centred care", "Military discipline", "Boarding school model"],
-correct: 1,
-explanation: "BTC emphasises a family-centred approach and active parental involvement."
+question:"What age group is the primary focus of BTC?",
+correct:"Birth to 6 years",
+wrong:["Birth to 3 years","6 to 12 years","3 to 10 years"],
+explanation:"BTC focuses on early childhood development."
 },
 {
-question: "5. Which of the following therapies is offered by BTC?",
-options: ["Hydrotherapy", "Flight Therapy", "Equestrian Racing", "Aviation Training"],
-correct: 0,
-explanation: "BTC offers hydrotherapy alongside speech, occupational, play, physio and other therapies."
+question:"BTC is best described as a:",
+correct:"Non-profit organisation",
+wrong:["Private hospital","Government agency","University"],
+explanation:"BTC operates as a registered non-profit organisation."
 },
 {
-question: "6. What type of organisation is BTC?",
-options: ["Private bank", "Registered non-profit organisation", "Government ministry", "Retail company"],
-correct: 1,
-explanation: "BTC operates as a registered non-profit organisation."
+question:"Which outreach initiative belongs to BTC?",
+correct:"The Godfather Project",
+wrong:["Future Child Project","Guardian Initiative","Hope Project"],
+explanation:"The Godfather Project extends support into communities."
 },
 {
-question: "7. What is the name of BTC's outreach programme?",
-options: ["Hope Initiative", "The Godfather Project", "Future Kids Project", "Little Stars Programme"],
-correct: 1,
-explanation: "The Godfather Project provides outreach therapy, assessments and caregiver training."
+question:"Which therapy is offered by BTC?",
+correct:"Speech Therapy",
+wrong:["Cardiology","Dermatology","Radiology"],
+explanation:"Speech Therapy is one of BTC's core services."
 },
 {
-question: "8. Which condition is specifically mentioned as an area of expertise?",
-options: ["Broken bones", "Heart surgery", "Cerebral Palsy", "Dental implants"],
-correct: 2,
-explanation: "BTC supports children with conditions including Cerebral Palsy, Autism and developmental delays."
+question:"Which therapy is offered by BTC?",
+correct:"Occupational Therapy",
+wrong:["Neurosurgery","Oncology","Orthodontics"],
+explanation:"Occupational Therapy helps children develop functional skills."
 },
 {
-question: "9. Where in Pretoria is BTC situated?",
-options: ["Centurion", "Hatfield", "Lynnwood", "Menlyn Mall"],
-correct: 2,
-explanation: "The centre is located at 347 Elizabeth Grove South, Lynnwood, Pretoria."
+question:"Which therapy is offered by BTC?",
+correct:"Physiotherapy",
+wrong:["Dialysis","Plastic Surgery","Cardiac Surgery"],
+explanation:"Physiotherapy supports movement and development."
 },
 {
-question: "10. What is BTC's overall mission?",
-options: [
-"Train professional athletes",
-"Promote child development and reduce developmental delays",
-"Provide university education",
-"Offer tourism services"
-],
-correct: 1,
-explanation: "BTC aims to improve child development through early intervention and specialised therapeutic support."
+question:"Which water-based service is offered?",
+correct:"Aqua Therapy",
+wrong:["Scuba Therapy","Marine Therapy","Swimming Coaching"],
+explanation:"BTC offers Aqua Therapy."
+},
+{
+question:"BTC follows which philosophy?",
+correct:"Family-centred care",
+wrong:["Military discipline","Boarding model","Competition model"],
+explanation:"Parents are actively involved in therapy."
+},
+{
+question:"Which condition does BTC support?",
+correct:"Autism",
+wrong:["Appendicitis","Glaucoma","Gallstones"],
+explanation:"Autism is among the developmental conditions supported."
+},
+{
+question:"Which condition does BTC support?",
+correct:"Cerebral Palsy",
+wrong:["Osteoporosis","Arthritis","Parkinson's Disease"],
+explanation:"BTC supports children with Cerebral Palsy."
+},
+{
+question:"Which condition does BTC support?",
+correct:"Developmental Delay",
+wrong:["Kidney Stones","Pneumonia","Migraine"],
+explanation:"Developmental delay is a major focus area."
+},
+{
+question:"Which group is strongly involved in BTC interventions?",
+correct:"Parents and caregivers",
+wrong:["Sports coaches","Lawyers","Architects"],
+explanation:"Family participation is central to BTC's approach."
+},
+{
+question:"What is a major goal of therapy?",
+correct:"Promoting independence",
+wrong:["Professional sports","University preparation","Military readiness"],
+explanation:"Therapy aims to increase participation and independence."
+},
+{
+question:"BTC specialises in:",
+correct:"Early intervention",
+wrong:["Emergency medicine","Trauma surgery","Cosmetic treatment"],
+explanation:"Early intervention can improve developmental outcomes."
+},
+{
+question:"The Godfather Project mainly serves:",
+correct:"Underserved communities",
+wrong:["Luxury estates","Universities","Corporate offices"],
+explanation:"The programme reaches vulnerable communities."
+},
+{
+question:"BTC provides support for:",
+correct:"Children with developmental challenges",
+wrong:["Professional athletes","Business executives","Retirees"],
+explanation:"BTC focuses on children with developmental needs."
+},
+{
+question:"What is one purpose of donations?",
+correct:"Making therapy accessible",
+wrong:["Funding tourism","Building hotels","Purchasing sports facilities"],
+explanation:"Donations help children access therapy services."
+},
+{
+question:"BTC works through a:",
+correct:"Multidisciplinary team",
+wrong:["Single-doctor model","Volunteer-only team","Sports committee"],
+explanation:"Multiple professionals collaborate on care."
+},
+{
+question:"BTC's mission focuses on:",
+correct:"Unlocking children's potential",
+wrong:["Training physicians","Running schools","Building hospitals"],
+explanation:"Helping children reach their potential is central to BTC."
+},
+{
+question:"Which professional service is likely to support communication skills?",
+correct:"Speech Therapy",
+wrong:["Radiology","Orthopaedics","Cardiology"],
+explanation:"Speech therapists help with communication and feeding."
+},
+{
+question:"Where is BTC located?",
+correct:"Gauteng Province",
+wrong:["Western Cape","KwaZulu-Natal","Free State"],
+explanation:"Pretoria is located in Gauteng."
+},
+{
+question:"Which age group benefits most from early intervention?",
+correct:"Young children",
+wrong:["Retirees","University students","Working adults"],
+explanation:"BTC specialises in young children."
+},
+{
+question:"What is often emphasised in therapy planning?",
+correct:"Individual needs",
+wrong:["National rankings","School grades","Athletic performance"],
+explanation:"Therapy is tailored to each child."
+},
+{
+question:"What type of support do families receive?",
+correct:"Guidance and training",
+wrong:["Tax consulting","Driving lessons","Legal services"],
+explanation:"Families receive practical developmental guidance."
+},
+{
+question:"Which word best describes BTC's approach?",
+correct:"Holistic",
+wrong:["Competitive","Commercial","Political"],
+explanation:"BTC addresses multiple aspects of child development."
+},
+{
+question:"BTC is known for supporting:",
+correct:"Children with special needs",
+wrong:["Elite athletes","Tourists","University graduates"],
+explanation:"Specialised developmental support is BTC's focus."
+},
+{
+question:"What is the overall aim of BTC therapy?",
+correct:"Improved participation in daily life",
+wrong:["Professional qualification","Sporting success","Financial independence"],
+explanation:"Therapy seeks to improve everyday functioning."
 }
 ];
-let score = 0;
-let answered = 0;
-const quizContainer = document.getElementById("quiz");
-quizData.forEach((q, index) => {
-    const div = document.createElement("div");
-    div.className = "question";
-    let html = `<h3>${q.question}</h3>`;
-    q.options.forEach((option, i) => {
-        html += `
-        <button class="option"
-            onclick="checkAnswer(this, ${index}, ${i})">
-            ${option}
-        </button>`;
-    });
-    html += `
-    <div class="feedback" id="feedback-${index}"></div>
-    `;
-    div.innerHTML = html;
-    quizContainer.appendChild(div);
+function shuffle(array){
+    const arr=[...array];
+    for(let i=arr.length-1;i>0;i--){
+        const j=Math.floor(Math.random()*(i+1));
+        [arr[i],arr[j]]=[arr[j],arr[i]];
+    }
+    return arr;
+}
+const quizData=shuffle(allQuestions)
+.slice(0,10)
+.map(q=>{
+    const options=shuffle([
+        q.correct,
+        ...q.wrong
+    ]);
+    return{
+        question:q.question,
+        options:options,
+        correct:options.indexOf(q.correct),
+        explanation:q.explanation
+    };
 });
-function checkAnswer(button, questionIndex, selectedIndex) {
-    const questionDiv = button.parentElement;
-    if(questionDiv.dataset.answered === "true"){
+let score=0;
+let answered=0;
+const quiz=document.getElementById("quiz");
+quizData.forEach((q,index)=>{
+    const div=document.createElement("div");
+    div.className="question";
+    let html=`<h3>${index+1}. ${q.question}</h3>`;
+    q.options.forEach((option,i)=>{
+        html+=`
+        <button class="option"
+        onclick="checkAnswer(this,${index},${i})">
+        ${option}
+        </button>
+        `;
+    });
+    html+=`<div class="feedback" id="feedback-${index}"></div>`;
+    div.innerHTML=html;
+    quiz.appendChild(div);
+});
+function checkAnswer(button,questionIndex,selectedIndex){
+    const qDiv=button.parentElement;
+    if(qDiv.dataset.answered==="true"){
         return;
     }
-    questionDiv.dataset.answered = "true";
-    const buttons = questionDiv.querySelectorAll(".option");
-    buttons.forEach(btn => btn.disabled = true);
-    const feedback = document.getElementById(`feedback-${questionIndex}`);
-    const correctIndex = quizData[questionIndex].correct;
-    if(selectedIndex === correctIndex){
+    qDiv.dataset.answered="true";
+    const buttons=qDiv.querySelectorAll(".option");
+    buttons.forEach(btn=>btn.disabled=true);
+    const feedback=document.getElementById(
+        `feedback-${questionIndex}`
+    );
+    const correctIndex=quizData[questionIndex].correct;
+    if(selectedIndex===correctIndex){
         button.classList.add("correct");
-        feedback.className = "feedback correct";
-        feedback.innerHTML =
-            "<strong>Correct!</strong><br>" +
-            quizData[questionIndex].explanation;
+        feedback.className="feedback correct";
+        feedback.innerHTML=
+        "<strong>Correct!</strong><br>"+
+        quizData[questionIndex].explanation;
         score++;
-    } else {
+    }else{
         button.classList.add("incorrect");
         buttons[correctIndex].classList.add("correct");
-        feedback.className = "feedback incorrect";
-        feedback.innerHTML =
-            "<strong>Incorrect.</strong><br>" +
-            quizData[questionIndex].explanation;
+        feedback.className="feedback incorrect";
+        feedback.innerHTML=
+        "<strong>Incorrect.</strong><br>"+
+        quizData[questionIndex].explanation;
     }
-    feedback.style.display = "block";
+    feedback.style.display="block";
     answered++;
-    document.getElementById("score").textContent = score;
-    if(answered === quizData.length){
+    document.getElementById("score").textContent=score;
+    if(answered===10){
         showFinalResult();
     }
 }
 function showFinalResult(){
-    const result = document.getElementById("finalResult");
-    let message = "";
-    if(score >= 9){
-        message = "Outstanding knowledge of BTC!";
-    } else if(score >= 7){
-        message = "Very good understanding of the Baby Therapy Centre.";
-    } else if(score >= 5){
-        message = "Good effort. Consider exploring BTC's services further.";
-    } else {
-        message = "You may want to learn more about the Baby Therapy Centre.";
+    const result=document.getElementById("finalResult");
+    let message="";
+    if(score===10){
+        message="Perfect score!";
+    }else if(score>=8){
+        message="Excellent knowledge of BTC.";
+    }else if(score>=6){
+        message="Good result.";
+    }else{
+        message="Consider exploring the Baby Therapy Centre website further.";
     }
-    result.innerHTML = `
-        <h2>Quiz Complete</h2>
-        <p>Your Score: <strong>${score}/10</strong></p>
+    result.innerHTML=`
+        <h2>Quiz Completed</h2>
+        <p><strong>Your score: ${score}/10</strong></p>
         <p>${message}</p>
     `;
-    result.style.display = "block";
+    result.style.display="block";
 }
 </script>
 </body>
